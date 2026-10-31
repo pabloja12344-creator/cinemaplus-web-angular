@@ -1,0 +1,18 @@
+@if(usuario){
+<ul class="nav nav-underline">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="/bienvenida">Bienvenida</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" (click)="logout()">Logout</a>
+  </li>
+  
+  <li class="nav-item">
+    <a class="nav-link disabled" aria-disabled="true">{{usuario.nombres}}</a>
+  </li>
+</ul>
+}
+@else{
+  <h1>Sistema de cine</h1>
+  <hr> 
+}

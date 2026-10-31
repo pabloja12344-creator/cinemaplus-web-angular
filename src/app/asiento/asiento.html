@@ -1,0 +1,64 @@
+<div class="container mt-4">
+  <h2>Crear asiento nuevo:</h2>
+
+  <form [formGroup]="formulario" (ngSubmit)="guardar()">
+    
+   
+    <div class="mb-3 row">
+      <label class="col-sm-2 col-form-label">ID Sala:</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" formControlName="idSala">
+        @if(formulario.get('idSala')?.invalid && formulario.get('idSala')?.touched){
+          <div class="text-danger small">El ID de la sala es obligatorio</div>
+        }
+      </div>
+    </div>
+
+    
+    <div class="mb-3 row">
+      <label class="col-sm-2 col-form-label">Fila:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" formControlName="fila">
+        @if(formulario.get('fila')?.invalid && formulario.get('fila')?.touched){
+          <div class="text-danger small">La fila es obligatoria</div>
+        }
+      </div>
+    </div>
+
+    
+    <div class="mb-3 row">
+      <label class="col-sm-2 col-form-label">Número:</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" formControlName="numero">
+        @if(formulario.get('numero')?.invalid && formulario.get('numero')?.touched){
+          <div class="text-danger small">El número es obligatorio</div>
+        }
+      </div>
+    </div>
+
+    <button class="btn btn-info float-end" type="submit">Ingresar</button>
+  </form>
+
+  <div class="clearfix"></div>
+
+  <h2 class="mt-4">Consulta de asientos:</h2>
+
+ <table class="table table-sm table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Fila</th>
+        <th>Número</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(asiento of asientos; track asiento.idAsiento){
+      <tr>
+        <td>{{asiento.idAsiento}}</td>
+        <td>{{asiento.fila}}</td>
+        <td>{{asiento.numero}}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

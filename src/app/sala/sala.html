@@ -1,0 +1,67 @@
+<div class="container mt-4">
+<h2>Crear sala nueva:</h2>
+
+
+<form [formGroup]="formulario" (ngSubmit)="guardar()">
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Nombre de sala:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="nombre">
+            @if(formulario.get('nombre')?.invalid &&
+            formulario.get('nombre')?.touched){
+            <div>El nombre de la sala es obligatorio</div>
+            }
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Fila:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="filas">
+            @if(formulario.get('filas')?.invalid &&
+            formulario.get('filas')?.touched){
+            <div>La fila es obligatoria</div>
+            }
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Asiento por fila:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="asientosPorFilas">
+            @if(formulario.get('asientosPorFilas')?.invalid &&
+            formulario.get('asientosPorFilas')?.touched){
+            <div>El asiento por fila es obligatorio</div>
+            }
+        </div>
+    </div>
+
+    <button class="btn btn-info float-end" type="submit">Ingresar</button>
+</form>
+
+<h2>Consulta de salas:</h2>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Filas</th>
+            <th>Asiento por fila</th>
+            <th>Accioenes</th>
+        </tr>
+    </thead>
+<tbody>
+        @for(sala of salas; track sala.idsSala){
+        <tr>
+            <td>{{sala.idSala}}</td>
+            <td>{{sala.nombre}}</td>
+            <td>{{sala.filas}}</td>
+            <td>{{sala.asientosPorFilas}}</td>
+            <td><button (click)="verAsientos(sala)">Ver Asientos</button></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

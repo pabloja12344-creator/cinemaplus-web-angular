@@ -1,0 +1,120 @@
+<div class="container mt-4">
+  <h2>Crear película nueva:</h2>
+
+  <form [formGroup]="formulario" (ngSubmit)="guardar()">
+    
+    <div class="mb-3 row">
+      <label class="col-sm-2 col-form-label">Título:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" formControlName="titulo">
+        @if(formulario.get('titulo')?.invalid && formulario.get('titulo')?.touched){
+          <div class="text-danger small">El título es obligatorio</div>
+        }
+      </div>
+    </div>
+
+    
+    <div class="mb-3 row">
+      <label class="col-sm-2 col-form-label">Sinopsis:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" formControlName="sinopsis">
+        @if(formulario.get('sinopsis')?.invalid && formulario.get('sinopsis')?.touched){
+          <div class="text-danger small">La sinopsis es obligatoria</div>
+        }
+      </div>
+    </div>
+
+   
+    <div class="mb-3 row">
+      <label class="col-sm-2 col-form-label">Duración (minutos):</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" formControlName="duracionMinutos">
+        @if(formulario.get('duracionMinutos')?.invalid && formulario.get('duracionMinutos')?.touched){
+          <div class="text-danger small">La duración es obligatoria</div>
+        }
+      </div>
+    </div>
+
+    
+    <div class="mb-3 row">
+      <label class="col-sm-2 col-form-label">ID Género:</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" formControlName="idGenero">
+        @if(formulario.get('idGenero')?.invalid && formulario.get('idGenero')?.touched){
+          <div class="text-danger small">El ID del género es obligatorio</div>
+        }
+      </div>
+    </div>
+
+    
+    <div class="mb-3 row">
+      <label class="col-sm-2 col-form-label">ID Clasificación:</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" formControlName="idClasificacion">
+        @if(formulario.get('idClasificacion')?.invalid && formulario.get('idClasificacion')?.touched){
+          <div class="text-danger small">El ID de clasificación es obligatorio</div>
+        }
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label class="col-sm-2 col-form-label">URL Imagen:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" formControlName="imagenPromocional">
+        @if(formulario.get('imagenPromocional')?.invalid && formulario.get('imagenPromocional')?.touched){
+          <div class="text-danger small">La URL de la imagen es obligatoria</div>
+        }
+      </div>
+    </div>
+
+    @if(formulario.value.imagenPromocional){
+      <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Vista Previa:</label>
+        <div class="col-sm-10">
+          <img [src]="formulario.value.imagenPromocional" alt="Vista previa" style="max-height: 120px; border-radius: 6px;">
+        </div>
+      </div>
+    }
+
+    <button class="btn btn-info float-end" type="submit">Ingresar</button>
+  </form>
+
+  <div class="clearfix"></div>
+
+  <h2 class="mt-4">Consulta de películas:</h2>
+
+  <table class="table table-striped table-hover mt-3">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Título</th>
+        <th>Sinopsis</th>
+        <th>Duración</th>
+        <th>ID Género</th>
+        <th>ID Clasificación</th>
+        <th>Imagen</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(pelicula of peliculas; track pelicula.idPelicula){
+      <tr>
+
+        
+        <td>{{pelicula.idPelicula}}</td>
+        <td>{{pelicula.titulo}}</td>
+        <td>{{pelicula.sinopsis}}</td>
+        <td>{{pelicula.duracionMinutos}} min</td>
+        <td>{{pelicula.idGenero}}</td>
+        <td>{{pelicula.idClasificacion}}</td>
+        <td>
+          @if(pelicula.imagenPromocional){
+            <img [src]="pelicula.imagenPromocional" alt="Pelicula" style="width: 50px; height: 80px; object-fit: cover; border-radius: 2px;">
+          } @else {
+            <span class="text-muted">Sin imagen</span>
+          }
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
